@@ -509,8 +509,8 @@ body(в понятном виде) - diplomas={"education_type": "очное", "
                       "description": "Вид деятельности",
                       "type": "str"
                     },
-                    "city": {
-                      "description": "Город нахождения компании",
+                    "company_place": {
+                      "description": "Город/регион нахождения компании",
                       "type": "str"
                     },
                     "state": {
@@ -543,10 +543,6 @@ body(в понятном виде) - diplomas={"education_type": "очное", "
                     },
                     "last_reporting_date": {
                       "description": "Дата последнего отчета",
-                      "type": "str"
-                    },
-                    "actual_from": {
-                      "description": "Актуален с",
                       "type": "str"
                     },
                     "actual_to": {
