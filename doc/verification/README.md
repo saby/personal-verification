@@ -31,12 +31,12 @@
 - `work_permit_blank_number(str)` - номер бланка разрешения на работу/патент
 - `work_permit_doc_type(int)` - тип документа (0 - разрешение на работу/1 - патент)
 - `diplomas([str])` - документы об образовании (списком). Следующие поля должны быть json-строкой.
-  - `education_type(str)` - вид образования
-  - `document_type(str)` - тип документа (диплом|аттестат|свидетельство|удостоверение|сертификат|справка)
+  - `education_type(int)` - вид образования (3 - Среднее профессиональное образование, 5 - Высшее образование, 7 - Профессиональная переподготовка)
+  - `document_type(str)` - тип документа тип документа (0 - диплом, 1 - аттестат, 2 - свидетельство, 3 - удостоверение, 4 - сертификат, 5 - справка)
   - `series(str)` - серия бланка
   - `number(str)` - номер бланка
   - `surname(str)` - фамилия при получении 
-  - `register_number(str)` - регистрационный номер сертификата
+  - `register_number(str)` - регистрационный номер сертификата (указывается только для education_type = 7)
   - `issue_date(str)` - дата выдачи в формате yyyy-mm-dd
   - `organization_title(str)` - название образовательной организации
 
@@ -53,10 +53,10 @@
 
 **Пример запроса**  
 url - https://api.sbis.ru/pv/start-verification  
-body(в понятном виде) - diplomas={"education_type": "очное", "document_type": "диплом", "series": "161461", "number": "461451",
+body(в понятном виде) - diplomas={"education_type": 3, "document_type": 0, "series": "161461", "number": "461451",
 "surname": "Квантов", "register_number": "72542543", "issue_date": "2010-05-10",
 "organization_title": "УКГУ Квантозоводска"}&diplomas=
-{"education_type": "заочное", "document_type": "свидетельство", "series": "15215", "number": "51453421",
+{"education_type": 3, "document_type": 2, "series": "15215", "number": "51453421",
 "surname": "Квантов", "register_number": "314513541", "issue_date": "2003-06-24",
 "organization_title": "УКМ Квантозоводска"}&name=Патроним&surname=Квантов
 
@@ -192,11 +192,11 @@ body(в понятном виде) - diplomas={"education_type": "очное", "
               "properties": {
                 "education_type":{
                   "description": "Вид образования",
-                  "type": "str"
+                  "type": "int"
                 },
                 "document_type":{
                   "description": "Тип документа [диплом|аттестат|свидетельство|удостоверение|сертификат|справка]",
-                  "type": "str"
+                  "type": "int"
                 },
                 "series":{
                   "description": "Серия бланка",
