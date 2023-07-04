@@ -53,12 +53,12 @@
 
 **Пример запроса**  
 url - https://api.sbis.ru/pv/start-verification  
-body(в понятном виде) - diplomas={"education_type": 3, "document_type": 0, "series": "161461", "number": "461451",
-"surname": "Квантов", "register_number": "72542543", "issue_date": "2010-05-10",
-"organization_title": "УКГУ Квантозоводска"}&diplomas=
-{"education_type": 3, "document_type": 2, "series": "15215", "number": "51453421",
-"surname": "Квантов", "register_number": "314513541", "issue_date": "2003-06-24",
-"organization_title": "УКМ Квантозоводска"}&name=Патроним&surname=Квантов
+body(в понятном виде) - - 
+> {  
+    'name': 'Патроним',  
+    'surname': 'Квантов',  
+    'diplomas': '[{"education_type": 3, "document_type": 0, "series": "161461", "number": "461451", "surname": "Квантов", "register_number": "72542543", "issue_date": "2010-05-10", "organization_title": "УКГУ Квантозоводска"}, {"education_type": 3, "document_type": 2, "series": "15215", "number": "51453421", "surname": "Квантов", "register_number": "314513541", "issue_date": "2003-06-24", "organization_title": "УКМ Квантозоводска"}]'  
+}
 
 **Пример ответа**
 
