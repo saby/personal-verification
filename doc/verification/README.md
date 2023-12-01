@@ -23,6 +23,7 @@
 - `passport_department_code(str)` - код подразделения, выдавшего паспорт
 - `insurance_number(str)` - номер СНИЛС
 - `taxpayer_number(str)` - ИНН
+- `medical_book_number(str)` - номер медицинской книжки
 - `foreign_identity_series(str)` - серия иностранного паспорта
 - `foreign_identity_number(str)` - номер иностранного паспорта
 - `work_permit_series(str)` - серия разрешения на работу/патент
@@ -53,7 +54,7 @@
 
 **Пример запроса**  
 url - https://api.sbis.ru/pv/start-verification  
-body(в понятном виде) - - 
+body(в понятном виде) - 
 > {  
     'name': 'Патроним',  
     'surname': 'Квантов',  
@@ -1056,6 +1057,279 @@ body(в понятном виде) - -
               }
             }
           }
+        },
+        "sanctions": {
+          "description": "Проверка наличия в санкционных списках",
+          "type": "object",
+          "properties": {
+            "status": {
+              "description": "Статус проверки",
+              "type": "int"
+            },
+            "status_title": {
+              "description": "Текст статуса проверки",
+              "type": "str"
+            },
+            "current_request_time": {
+              "description": "Дата/время проверки",
+              "type": "str"
+            },
+            "previous_status": {
+              "description": "Прошлый статус проверки",
+              "type": "int"
+            },
+            "previous_status_title": {
+              "description": "Текст прошлого статус проверки",
+              "type": "str"
+            },
+            "previous_request_time": {
+              "description": "Дата/время прошлой проверки",
+              "type": "str"
+            },
+            "last_update_status": {
+              "description": "Последние дата/время изменение статуса",
+              "type": "str"
+            },
+            "data": {
+              "description": "Дополнительные данные",
+              "type": "object",
+              "properties": {
+                "countries": {
+                  "description": "Страны наложившие санкции",
+                  "type": "list",
+                  "items": [
+                    {
+                      "type": "str"
+                    }
+                  ]
+                },
+                "exact_match": {
+                  "description": "Точное совпадение",
+                  "type": "bool"
+                }
+              }
+            }
+          }
+        },
+        "foreign_agents": {
+          "description": "Проверка наличия в реестре иноагентов",
+          "type": "object",
+          "properties": {
+            "status": {
+              "description": "Статус проверки",
+              "type": "int"
+            },
+            "status_title": {
+              "description": "Текст статуса проверки",
+              "type": "str"
+            },
+            "current_request_time": {
+              "description": "Дата/время проверки",
+              "type": "str"
+            },
+            "previous_status": {
+              "description": "Прошлый статус проверки",
+              "type": "int"
+            },
+            "previous_status_title": {
+              "description": "Текст прошлого статус проверки",
+              "type": "str"
+            },
+            "previous_request_time": {
+              "description": "Дата/время прошлой проверки",
+              "type": "str"
+            },
+            "last_update_status": {
+              "description": "Последние дата/время изменение статуса",
+              "type": "str"
+            }
+          }
+        },
+        "medical_book": {
+          "description": "Проверка медицинской книжки",
+          "type": "object",
+          "properties": {
+            "status": {
+              "description": "Статус проверки",
+              "type": "int"
+            },
+            "status_title": {
+              "description": "Текст статуса проверки",
+              "type": "str"
+            },
+            "current_request_time": {
+              "description": "Дата/время проверки",
+              "type": "str"
+            },
+            "previous_status": {
+              "description": "Прошлый статус проверки",
+              "type": "int"
+            },
+            "previous_status_title": {
+              "description": "Текст прошлого статус проверки",
+              "type": "str"
+            },
+            "previous_request_time": {
+              "description": "Дата/время прошлой проверки",
+              "type": "str"
+            },
+            "last_update_status": {
+              "description": "Последние дата/время изменение статуса",
+              "type": "str"
+            },
+            "data": {
+              "description": "Дополнительные данные",
+              "type": "object",
+              "properties": {
+                "hygienic_training_entries": {
+                  "description": "записи о гигиеническом обучении в медкнижки (пример https://lmk.cgon.ru/search/?serialnumb=1)",
+                  "type": "list",
+                  "items": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "program_name": {
+                          "description": "Тип программы",
+                          "type": "str"
+                        },
+                        "program_group": {
+                          "description": "Название програмы",
+                          "type": "str"
+                        },
+                        "date_to": {
+                          "description": "Действует до",
+                          "type": "str"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "prosecutor_inspections": {
+          "description": "Проверка прокуратурой",
+          "type": "object",
+          "properties": {
+            "status": {
+              "description": "Статус проверки",
+              "type": "int"
+            },
+            "status_title": {
+              "description": "Текст статуса проверки",
+              "type": "str"
+            },
+            "current_request_time": {
+              "description": "Дата/время проверки",
+              "type": "str"
+            },
+            "previous_status": {
+              "description": "Прошлый статус проверки",
+              "type": "int"
+            },
+            "previous_status_title": {
+              "description": "Текст прошлого статус проверки",
+              "type": "str"
+            },
+            "previous_request_time": {
+              "description": "Дата/время прошлой проверки",
+              "type": "str"
+            },
+            "last_update_status": {
+              "description": "Последние дата/время изменение статуса",
+              "type": "str"
+            },
+            "data": {
+              "description": "Дополнительные данные",
+              "type": "object",
+              "properties": {
+                "inspections": {
+                  "description": "список проверок прокуратурой",
+                  "type": "list",
+                  "items": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "date": {
+                          "description": "дата прошедшей проверки/дата планируемой проверки",
+                          "type": "str"
+                        },
+                        "inspection_type": {
+                          "description": "тип инспекции",
+                          "type": "str"
+                        },
+                        "supervisor": {
+                          "description": "орган проводивший проверку",
+                          "type": "str"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "trust_loss": {
+          "description": "Проверка на наличие в реестре уволенных в связи с утратой доверия",
+          "type": "object",
+          "properties": {
+            "status": {
+              "description": "Статус проверки",
+              "type": "int"
+            },
+            "status_title": {
+              "description": "Текст статуса проверки",
+              "type": "str"
+            },
+            "current_request_time": {
+              "description": "Дата/время проверки",
+              "type": "str"
+            },
+            "previous_status": {
+              "description": "Прошлый статус проверки",
+              "type": "int"
+            },
+            "previous_status_title": {
+              "description": "Текст прошлого статус проверки",
+              "type": "str"
+            },
+            "previous_request_time": {
+              "description": "Дата/время прошлой проверки",
+              "type": "str"
+            },
+            "last_update_status": {
+              "description": "Последние дата/время изменение статуса",
+              "type": "str"
+            },
+            "data": {
+              "description": "Дополнительные данные",
+              "type": "object",
+              "properties": {
+                "registry_date": {
+                  "description": "дата занесения в реестр уволенных в связи с утратой доверия",
+                  "type": "str"
+                },
+                "act_date": {
+                  "description": "дата увольнения",
+                  "type": "str"
+                },
+                "organ": {
+                  "description": "место работы",
+                  "type": "str"
+                },
+                "position": {
+                  "description": "должность",
+                  "type": "str"
+                },
+                "act": {
+                  "description": "нарушение какого нормативного акта привело к увольнению",
+                  "type": "str"
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -1187,6 +1461,37 @@ wanted - проверка розыска:
     1 - В розыске  
     999 - Не смогли проверить нахождение в розыске  
 
+sanstions - нахождение в санкционных списках:
+
+    0 - Не числится в санкционных списках
+    1 - Числится в санкционных списках
+    999 - Не смогли проверить наличие в санкционных списках
+
+foreign_agents - нахождение в реестре иноагентов:
+
+    0 - Не числится в реестре иноагентов
+    1 - Числится в реестре иноагентов
+    999 - Не смогли проверить наличие в реестре иноагентов
+
+medical_book - медицинские книжки:
+
+    0 - Медицинская книжка действительна
+    1 - Медицинская книжка недействительна
+    999 - Медицинская книжка не проверена
+
+prosecutor_inspections - проверки прокуратурой:
+
+    0 - Нет проводимых проверок
+    1 - В отношении лица проводятся проверки
+    999 - Не смогли проверить наличие проверок прокуратуры
+
+trust_loss - утрата доверия:
+
+    0 - Нет в реестре лиц, уволенных в связи с утратой доверия
+    1 - Уволен в связи с утратой доверия
+    999 - Не смогли проверить нахождения в реестре уволенных в связи с утратой доверия
+
+
 **Поле state**
 
     0: 'ликвидирован',
@@ -1211,4 +1516,39 @@ wanted - проверка розыска:
 
 ```json
 PDF-file
+```
+
+***
+
+Получить параметры лицензии
+
+**URL** : `/check-license`
+
+**Метод** : `GET`
+
+**Формат ответа**
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "unique_value_limit": {
+      "description": "Количество запросов в лицензии",
+      "type": "int"
+    },
+    "unique_value_count": {
+      "description": "Количество сделанных запросов по лицензии",
+      "type": "int"
+    }
+  }
+}
+```
+
+**Пример ответа**
+
+```json
+{
+  "unique_value_limit": 1000,
+  "unique_value_count": 123
+}
 ```
