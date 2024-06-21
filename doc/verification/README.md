@@ -47,8 +47,36 @@
 
 ```json
 {
-  "type": "str",
-  "description": "task_id. В дальнейшем по нему можно получить результаты проверки, или перезапустить проверку"
+  "type": "object",
+  "properties": {
+    "task_id": {
+      "description": "Идентификатор проверки. В дальнейшем по нему можно получить результаты проверки, или перезапустить проверку",
+      "type": "str"
+    },
+    "errors": {
+      "description": "Список некорректных документов",
+      "type": "list",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "document_type": {
+              "description": "Тип документа. Возможные значения: «passport», «insurance», «taxpayer», «work_permit», «foreign_identity», «medical_book», «diplomas»",
+              "type": "str"
+            },
+            "value": {
+              "description": "Идентификатор документа, например серия и номер",
+              "type": "str"
+            },
+            "reason": {
+              "description": "Причина некорректности данных документа",
+              "type": "str"
+            }
+          }
+        }
+      ]
+    }
+  }
 }
 ```
 
@@ -64,8 +92,114 @@ body(в понятном виде) -
 **Пример ответа**
 
 ```json
-00000000-0000-0000-0000-000000000000
+{
+  "task_id": "22200000-0000-0000-0000-000000000000",
+  "errors": [
+    {
+      "document_type": "passport",
+      "reason": "Количество символов серии и номера паспорта должно быть равно 10.",
+      "value": "43215;123456"
+    },
+    {
+      "document_type": "insurance",
+      "reason": "Количество символов СНИЛС должно быть равно 11.",
+      "value": "333"
+    },
+    {
+      "document_type": "taxpayer",
+      "reason": "Количество символов ИНН для физ. лиц должно быть равно 12.",
+      "value": "4098921036343"
+    },
+    {
+      "document_type": "medical_book",
+      "reason": "Номер медицинской книжки не может начинаться с нуля",
+      "value": "0"
+    },
+    {
+      "document_type": "diplomas",
+      "reason": "Не удалось найти образовательную организацию по её названию",
+      "value": "777666;654321"
+    }
+  ]
+}
 ```
+
+**Обязательные параметры для каждого вида проверки**
+
+Проверка паспорта
+
+- `passport_number`
+- `passport_series`
+- `passport_issuer`
+
+Проверка СНИЛС
+
+- `insurance_number`
+- `birth_date`
+
+Разрешение/патент на работу
+
+- `work_permit_doc_type`
+- `work_permit_series`
+- `work_permit_number`
+- `work_permit_blank_series`
+- `work_permit_blank_number`
+- `foreign_identity_number`
+
+Медицинская книжка
+
+- `medical_book_number`
+
+Дипломы
+
+- `series`
+- `number`
+- `issue_date`
+- `organization_title`
+
+ИНН
+
+- `taxpayer_number`
+
+Самозанятость
+
+- `taxpayer_number`
+
+Проверки бизнеса
+
+- `taxpayer_number`
+
+Проверки прокуратурой
+
+- `taxpayer_number`
+
+Розыск
+
+- `birth_date`
+
+Терроризм
+
+- `birth_date`
+
+Долги по налогам
+
+- `birth_date`
+
+Долги по исполнительным листам
+
+- `taxpayer_number`
+
+Организация-банкрот
+
+- `taxpayer_number`
+
+Личное банкротство
+
+- `taxpayer_number`
+
+Дисквалификация
+
+- `taxpayer_number`
 
 ***
 
