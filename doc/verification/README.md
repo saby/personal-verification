@@ -1054,6 +1054,18 @@ body(в понятном виде) -
                       "description": "Статус",
                       "type": "str"
                     },
+                    "case_number": {
+                      "description": "Номер дела",
+                      "type": "str"
+                    },
+                    "exact_match": {
+                      "description": "True - точное сопоставление по ФИО и ИНН, False - не точное, по ФИО, может быть тезка",
+                      "type": "bool"
+                    },
+                    "case_link": {
+                      "description": "Cсылка на суд в картотеке арбитражных дел",
+                      "type": "str"
+                    },
                     "decision_name": {
                       "description": "Решение по делу",
                       "type": "str"
