@@ -183,11 +183,13 @@ body(в понятном виде) -
 
 Долги по налогам
 
-- `birth_date`
+- `taxpayer_number`
 
 Долги по исполнительным листам
 
-- `taxpayer_number`
+- `passport_number`
+- `passport_series`
+- `insurance_number`
 
 Организация-банкрот
 
