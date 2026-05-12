@@ -14,7 +14,7 @@
 - `gender(str)` - пол. Возможные значения (m/f)
 - `birth_date(str)` - дата рождения в формате yyyy-mm-dd
 - `birth_place(str)` - место рождения
-- `citizenship(str)` - код гражданства
+- `citizenship(str)` - код гражданства. Полный список значений можно узнать в Общероссийском классификаторе стран мира
 - `citizenship_title(str)` - название гражданства
 - `passport_series(str)` - серия паспорта
 - `passport_number(str)` - номер паспорта
@@ -170,7 +170,7 @@ body(в понятном виде) -
   ]
 } 
 ```
-**Поянения**
+**Пояснения**
 Saby не выполняет повторную проверку документов с одинаковыми номерами в разных операциях. Возможны две ситуации:
 дубли в новой проверке — вы создаете новую проверку для одного физлица и указываете документ, который уже был обработан в проверке другого физлица. В этом случае проверка не будет запущена, чтобы не расходовать лицензию. Информация о дублирующихся документах поступит в поле errors;
 дубли в существующей проверке — вы добавляете документы в уже созданную проверку. Если добавляемый документ уже был использован в проверке другого физлица, то текущая проверка запустится, но данный документ проверяться не будет. Система сообщит о нем в поле errors, и лицензия на него не израсходуется.
@@ -1190,6 +1190,40 @@ Saby не выполняет повторную проверку докумен�
             }
           }
         },
+        "controlled_people_registry": {
+          "description": "проверка на нахождение в реестре контролируемых лиц МВД",
+          "type": "object",
+          "properties": {
+            "status": {
+              "description": "Статус проверки",
+              "type": "int"
+            },
+            "status_title": {
+              "description": "Текст статуса проверки",
+              "type": "str"
+            },
+            "current_request_time": {
+              "description": "Дата/время проверки",
+              "type": "str"
+            },
+            "previous_status": {
+              "description": "Прошлый статус проверки",
+              "type": "int"
+            },
+            "previous_status_title": {
+              "description": "Текст прошлого статус проверки",
+              "type": "str"
+            },
+            "previous_request_time": {
+              "description": "Дата/время прошлой проверки",
+              "type": "str"
+            },
+            "last_update_status": {
+              "description": "Последние дата/время изменение статуса",
+              "type": "str"
+            }
+          }
+        },
         "wanted": {
           "description": "Проверка розыска",
           "type": "object",
@@ -1537,6 +1571,329 @@ Saby не выполняет повторную проверку докумен�
 }
 ```
 
+
+**Пример ответа**
+```json
+{
+  "last_verification_date_time": "2023-03-15T12:02:21.413141",
+  "person": {
+    "birth_date": "1991-01-01",
+    "birth_place": "Россия, Московская обл., г. Москва",
+    "citizenship": "643",
+    "citizenship_title": "Россия",
+    "diplomas": [],
+    "foreign_identity_number": null,
+    "foreign_identity_series": null,
+    "gender": null,
+    "insurance_number": "55101314322",
+    "name": "Иван",
+    "passport_department_code": null,
+    "passport_issue_date": null,
+    "passport_issuer": null,
+    "passport_number": "123456",
+    "passport_series": "1234",
+    "patronymic": "Иванович",
+    "surname": "Иванов",
+    "taxpayer_number": "347770388808",
+    "work_permit_blank_number": null,
+    "work_permit_blank_series": null,
+    "work_permit_doc_type": null,
+    "work_permit_number": null,
+    "work_permit_series": null
+  },
+  "task_id": "00000000-0000-0000-0000-000000000000",
+  "verifications": {
+    "business": {
+      "current_request_time": "2023-03-10T12:02:21.413141",
+      "data": [
+        {
+          "actual_record": true,
+          "actual_to": "",
+          "company_name": "ООО Васильки Железнодорожные",
+          "company_place": "Ростовская область",
+          "founders": [
+            {
+              "actual": true,
+              "date_from": "14.02.1995",
+              "date_to": "",
+              "name": "Иванов И.И.",
+              "share": 100
+            }
+          ],
+          "inn": "4886026572",
+          "is_accurate_match": true,
+          "is_our_company": false,
+          "kind_of_activity": "Проектная документация, инженерные услуги в области строительства",
+          "kpp": "216344190",
+          "last_reporting_date": "2022-12-01",
+          "liquidation_date": "",
+          "managers": [
+            {
+              "actual": true,
+              "date_from": "14.02.1995",
+              "date_to": "",
+              "name": "Иванов И.И.",
+              "share": 100
+            }
+          ],
+          "proceeds": 410000,
+          "registration_date": "14.02.1995",
+          "state": 1,
+          "violation_messages": [
+            "Конфликт интересов"
+          ]
+        },
+        {
+          "actual_record": false,
+          "actual_to": "18.03.2013",
+          "company_name": "ЗАО Заход",
+          "company_place": "Москва",
+          "founders": [
+            {
+              "actual": true,
+              "date_from": "14.02.2010",
+              "date_to": "18.03.2013",
+              "name": "Иванов И.И.",
+              "share": 100
+            }
+          ],
+          "inn": "2242523726",
+          "is_accurate_match": true,
+          "is_our_company": false,
+          "kind_of_activity": "Растениеводство",
+          "kpp": "703001269",
+          "last_reporting_date": "2013-01-01",
+          "liquidation_date": "18.03.2013",
+          "managers": [
+            {
+              "actual": true,
+              "date_from": "14.02.2010",
+              "date_to": "18.03.2013",
+              "name": "Петров И.С.",
+              "share": null
+            }
+          ],
+          "proceeds": 51200,
+          "registration_date": "14.02.2010",
+          "state": 0,
+          "violation_messages": []
+        }
+      ],
+      "last_update_status": "2023-03-10T13:02:21.413141",
+      "previous_request_time": "2023-03-05T12:02:21.413141",
+      "previous_status": 999,
+      "previous_status_title": "Не смогли выполнить проверку (сервис не доступен/внутрення ошибка)",
+      "status": 2,
+      "status_title": "Учредитель"
+    },
+    "insurance": {
+      "current_request_time": "2023-03-10T12:02:21.413141",
+      "last_update_status": "2023-03-10T13:02:21.413141",
+      "previous_request_time": null,
+      "previous_status": null,
+      "previous_status_title": null,
+      "status": 0,
+      "status_title": "СНИЛС действителен"
+    },
+    "passport": {
+      "current_request_time": "2023-03-10T12:02:21.413141",
+      "last_update_status": "2023-03-10T13:02:21.413141",
+      "previous_request_time": null,
+      "previous_status": null,
+      "previous_status_title": null,
+      "status": 0,
+      "status_title": "Паспорт действителен"
+    },
+    "self_employed": {
+      "current_request_time": "2023-03-10T12:02:21.413141",
+      "last_update_status": "2023-03-10T13:02:21.413141",
+      "previous_request_time": null,
+      "previous_status": null,
+      "previous_status_title": null,
+      "status": 1,
+      "status_title": "Является самозанятым"
+    },
+    "taxes": {
+      "current_request_time": "2023-03-10T12:02:21.413141",
+      "data": [
+        {
+          "actual": true,
+          "case_id": "322078161878598201927",
+          "date": "2019-05-18",
+          "description": "УФК по Оренбургской области (МРИ ФНС России №7 по Оренбургской области)",
+          "sum": 980.23,
+          "termination_date": null,
+          "termination_reason": null,
+          "title": "Земельный налог"
+        },
+        {
+          "actual": true,
+          "case_id": "694018190560172101941",
+          "date": "2019-03-14",
+          "description": "УФК по г. Москве (МРИ ФНС России №7 по Оренбургской области)",
+          "sum": 7281.64,
+          "termination_date": null,
+          "termination_reason": null,
+          "title": "Налог на имущество (пени)"
+        },
+        {
+          "actual": true,
+          "case_id": "668031934451823413070",
+          "date": "2020-03-11",
+          "description": "УФК по г. Москве (ИФНС России № 21 по г.Москве)",
+          "sum": 5332.64,
+          "termination_date": null,
+          "termination_reason": null,
+          "title": "Транспортный налог"
+        }
+      ],
+      "last_update_status": "2023-03-10T13:02:21.413141",
+      "previous_request_time": null,
+      "previous_status": null,
+      "previous_status_title": null,
+      "status": 1,
+      "status_title": "Долги"
+    },
+    "taxpayer_number": {
+      "current_request_time": "2023-03-10T12:02:21.413141",
+      "last_update_status": "2023-03-10T13:02:21.413141",
+      "previous_request_time": null,
+      "previous_status": null,
+      "previous_status_title": null,
+      "status": 0,
+      "status_title": "Нет проблем"
+    },
+    "terrorism": {
+      "current_request_time": "2023-03-10T12:02:21.413141",
+      "last_update_status": "2023-03-10T13:02:21.413141",
+      "previous_request_time": null,
+      "previous_status": null,
+      "previous_status_title": null,
+      "status": 1,
+      "status_title": "Числится в списке террористов, экстремистов"
+    },
+    "wanted": {
+      "current_request_time": "2023-03-10T12:02:21.413141",
+      "data": {
+        "additional_info": null,
+        "birth_place": "Россия, Московская обл., г. Москва",
+        "gender": "Не указан",
+        "initiator": "УМВД РОССИИ по Москве и Московской области",
+        "nationality": "Русский",
+        "photo": null,
+        "special_signs": "Рост 181 см, возраст 32 года, лицо овальное, волосы прямые, короткие, цвет волос тёмный с проседью, губы тонкие, подбородок прямой, ушные раковины прилегающие, cпинка носа искривлена, татуировки на руках. На животе имеется шрам после операции (удаление язвы)."
+      },
+      "last_update_status": "2023-03-10T13:02:21.413141",
+      "previous_request_time": "2023-03-11T12:02:21.413141",
+      "previous_status": 999,
+      "previous_status_title": "Не смогли проверить нахождение в розыске",
+      "status": 1,
+      "status_title": "В розыске"
+    },
+    "writs": {
+      "current_request_time": "2023-03-10T12:02:21.413141",
+      "data": [
+        {
+          "actual": true,
+          "case_id": "386713530748361390068",
+          "date": "2018-04-06",
+          "description": "УФК по г. Москве (УВД по ВАО г. Москвы, л/сч. № 04731448630)(ОБ ДПС ГИБДД УВД по ВАО ГУ МВД России по г. Москве)",
+          "sum": 500,
+          "termination_date": null,
+          "termination_reason": null,
+          "title": "Штраф по административному правонарушению №18810077210001160119"
+        },
+        {
+          "actual": true,
+          "case_id": "139864570723333173601",
+          "date": "2019-10-16",
+          "description": "МРИ ФНС России №7 по Ярославской области",
+          "sum": 4500,
+          "termination_date": null,
+          "termination_reason": null,
+          "title": "По постановлению № 7-360/2019 от 16 октября 2019 г."
+        },
+        {
+          "actual": true,
+          "case_id": "763718725953966392861",
+          "date": "2020-09-14",
+          "description": "МРИ ФНС России №7 по Ярославской области",
+          "sum": 1877.86,
+          "termination_date": null,
+          "termination_reason": null,
+          "title": "Аренда земельного участка по договору №40 от 14.09.2020 г."
+        },
+        {
+          "actual": true,
+          "case_id": "998618597928682007287",
+          "date": "2020-02-24",
+          "description": "УФК по Мурманской области (ОСП Первомайского округа г. Мурманска УФССП России по Мурманской области Л/С 05491844790)",
+          "sum": 24255.45,
+          "termination_date": null,
+          "termination_reason": null,
+          "title": "Оплата задолженности по ИП № 21435/20/51003-ИП от 2020-02-24 в отношении Виноградова А. С."
+        },
+        {
+          "actual": true,
+          "case_id": "844231370836851227861",
+          "date": "2018-10-30",
+          "description": "УФК по Мурманской области (ОСП Первомайского округа г. Мурманска УФССП России по Мурманской области Л/С 05491844790)",
+          "sum": 42079.25,
+          "termination_date": null,
+          "termination_reason": null,
+          "title": "Исполнительский сбор по пост. СПИ от 2018-10-30 в рамках дела 45466/20/27027-ИП в отношении Бойко И. О."
+        },
+        {
+          "actual": true,
+          "case_id": "513951120781987415206",
+          "date": "2020-10-26",
+          "description": "УФК по Мурманской области (ОСП Первомайского округа г. Мурманска УФССП России по Мурманской области Л/С 05491845745)",
+          "sum": 24255.45,
+          "termination_date": null,
+          "termination_reason": null,
+          "title": "Оплата задолженности по ИП № 45466/20/27027-ИП от 26.10.2020 в отношении Романов О. П."
+        },
+        {
+          "actual": true,
+          "case_id": "566849978293962222482",
+          "date": "2015-05-18",
+          "description": "УФК по г. Москве (УФССП России по г. Москве Л/С 05731785710)",
+          "sum": 1434.45,
+          "termination_date": null,
+          "termination_reason": null,
+          "title": "Административный штраф по пост. суда по делу об АП от 2015-05-18 в рамках дела 41/15/37/77-АП в отношении Филиппова А. С."
+        },
+        {
+          "actual": true,
+          "case_id": "855144441180588263382",
+          "date": "2019-03-11",
+          "description": "Отделение судебных приставов Кольского района",
+          "sum": 3451.23,
+          "termination_date": null,
+          "termination_reason": null,
+          "title": "Задолженность по платежам за услуги связи"
+        }
+      ],
+      "last_update_status": "2023-03-10T13:02:21.413141",
+      "previous_request_time": null,
+      "previous_status": null,
+      "previous_status_title": null,
+      "status": 1,
+      "status_title": "Долги"
+    }
+  },
+  "controlled_people_registry": {
+    "current_request_time": "2025-04-10T12:02:31.413141",
+    "last_update_status": "2025-04-10T12:02:31.413141",
+    "previous_request_time": null,
+    "previous_status": null,
+    "previous_status_title": null,
+    "status": 0,
+    "status_title": "Не числится в реестре контролируемых лиц МВД"
+  }
+}
+```
+
 **Статусы проверок**:  
 Общие (код присутствуют во всех проверках, но текстовый статус может меняться в зависимости от типа проверки):
 
@@ -1657,6 +2014,11 @@ terrorism - проверка террористов/экстремистов:
 
     1 - Числится в списке террористов, экстремистов  
     999 - Не смогли проверить наличие в списке террористов и экстремистов  
+
+controlled_people_registry - проверка на нахождение в реестре контролируемых лиц МВД:
+
+    0 - Не числится в реестре контроируемых лиц  
+    1 - Числится в в реестре контроируемых лиц  
 
 wanted - проверка розыска:
 
