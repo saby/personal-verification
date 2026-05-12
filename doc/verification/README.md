@@ -26,6 +26,7 @@
 - `medical_book_number(str)` - номер медицинской книжки
 - `foreign_identity_series(str)` - серия иностранного паспорта
 - `foreign_identity_number(str)` - номер иностранного паспорта
+- `foreign_identity_issue_date(str)` - дата выпуска иностранного паспорта
 - `work_permit_series(str)` - серия разрешения на работу/патент
 - `work_permit_number(str)` - номер разрешения на работу/патент
 - `work_permit_blank_series(str)` - серия бланка разрешения на работу/патент
@@ -231,6 +232,14 @@ Saby не выполняет повторную проверку докумен�
 Терроризм
 
 - `birth_date`
+
+Реестр контролируемых лиц
+
+- `birth_date`
+- `foreign_identity_series`
+- `foreign_identity_number`
+- `foreign_identity_issue_date`
+- `citizenship`
 
 Долги по налогам
 
